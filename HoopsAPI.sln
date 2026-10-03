@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopsAPI.Web", "HoopsAPI.Web\HoopsAPI.Web.csproj", "{71F62C76-DFC8-4824-A31B-8BCDCC2347FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopsAPI.Domain", "HoopsAPI.Domain\HoopsAPI.Domain.csproj", "{BF0DB55D-6308-4EAA-82C9-91A7913D96D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopsAPI.Repository", "HoopsAPI.Repository\HoopsAPI.Repository.csproj", "{A3EDC3E2-4F50-4CE4-BF98-A253168CD0AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopsAPI.Service", "HoopsAPI.Service\HoopsAPI.Service.csproj", "{51DFB33A-660C-4768-9437-296ED2136AED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{71F62C76-DFC8-4824-A31B-8BCDCC2347FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71F62C76-DFC8-4824-A31B-8BCDCC2347FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71F62C76-DFC8-4824-A31B-8BCDCC2347FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0DB55D-6308-4EAA-82C9-91A7913D96D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0DB55D-6308-4EAA-82C9-91A7913D96D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0DB55D-6308-4EAA-82C9-91A7913D96D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0DB55D-6308-4EAA-82C9-91A7913D96D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3EDC3E2-4F50-4CE4-BF98-A253168CD0AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3EDC3E2-4F50-4CE4-BF98-A253168CD0AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3EDC3E2-4F50-4CE4-BF98-A253168CD0AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3EDC3E2-4F50-4CE4-BF98-A253168CD0AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DFB33A-660C-4768-9437-296ED2136AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DFB33A-660C-4768-9437-296ED2136AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DFB33A-660C-4768-9437-296ED2136AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DFB33A-660C-4768-9437-296ED2136AED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
