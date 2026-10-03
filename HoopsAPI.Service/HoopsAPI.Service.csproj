@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HoopsAPI.Domain\HoopsAPI.Domain.csproj" />
+      <ProjectReference Include="..\HoopsAPI.Repository\HoopsAPI.Repository.csproj" />
+    </ItemGroup>
+
 </Project>

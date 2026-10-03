@@ -19,4 +19,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.4"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HoopsAPI.Domain\HoopsAPI.Domain.csproj" />
+      <ProjectReference Include="..\HoopsAPI.Repository\HoopsAPI.Repository.csproj" />
+      <ProjectReference Include="..\HoopsAPI.Service\HoopsAPI.Service.csproj" />
+    </ItemGroup>
+
 </Project>
