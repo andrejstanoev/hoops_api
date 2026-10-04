@@ -17,6 +17,6 @@ public class CoachAssignment
     public virtual SeasonTeam SeasonTeam { get; set; } = null!;
 
     public DateOnly StartDate { get; set; }
-    public DateOnly? EndDate { get; set; }
+    public DateOnly? EndDate { get; set; } = null;
     public CoachRole Role { get; set; } = CoachRole.Head;
 }

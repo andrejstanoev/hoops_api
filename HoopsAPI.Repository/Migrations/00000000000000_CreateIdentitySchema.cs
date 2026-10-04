@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HoopsAPI.Web.Data.Migrations
+namespace HoopsAPI.Repository.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
