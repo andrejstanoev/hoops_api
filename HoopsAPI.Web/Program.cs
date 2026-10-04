@@ -2,6 +2,8 @@ using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HoopsAPI.Repository;
+using HoopsAPI.Repository.Implementation;
+using HoopsAPI.Repository.Interface;
 
 Env.Load();
 
@@ -21,6 +23,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
@@ -45,7 +48,8 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    )
     .WithStaticAssets();
 
 app.MapRazorPages()
