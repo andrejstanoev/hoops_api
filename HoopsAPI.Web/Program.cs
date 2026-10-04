@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using HoopsAPI.Repository;
 using HoopsAPI.Repository.Implementation;
 using HoopsAPI.Repository.Interface;
+using HoopsAPI.Service.Implementation;
+using HoopsAPI.Service.Interface;
 
 Env.Load();
 
@@ -24,6 +26,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IArenaService, ArenaService>();
+builder.Services.AddScoped<ICoachService, CoachService>();
+builder.Services.AddScoped<ILeagueService, LeagueService>();
+builder.Services.AddScoped<IMatchService, MatchService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IRefereeService, RefereeService>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 
 var app = builder.Build();
 
