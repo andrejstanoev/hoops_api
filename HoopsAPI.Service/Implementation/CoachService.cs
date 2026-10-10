@@ -7,7 +7,6 @@ namespace HoopsAPI.Service.Implementation;
 
 public class CoachService : ICoachService
 {
-    
     private readonly IRepository<Coach> _repository;
 
     public CoachService(IRepository<Coach> repository)
@@ -25,18 +24,44 @@ public class CoachService : ICoachService
         throw new NotImplementedException();
     }
 
-    public Task<Coach> DeleteAsync(CoachDto coachDto)
+    public async Task<Coach> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var coach = await GetByIdNotNullAsync(id);
+        
+        return await _repository.DeleteAsync(coach);
     }
 
-    public Task<Coach> GetByIdAsync(Guid id)
+    public async Task<Coach?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var coach = await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
+
+        return coach;
     }
 
-    public Task<List<Coach>> GetAllAsync()
+    public async Task<Coach> GetByIdNotNullAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var coach = await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
+
+        if (coach == null)
+        {
+            throw new InvalidOperationException($"Coach with id {id} not found");
+        }
+
+        return coach;
+    }
+
+    public async Task<List<Coach>> GetAllAsync()
+    {
+        var coaches = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return coaches.ToList();
     }
 }

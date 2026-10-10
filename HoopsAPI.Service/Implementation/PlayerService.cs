@@ -24,18 +24,36 @@ public class PlayerService : IPlayerService
         throw new NotImplementedException();
     }
 
-    public Task<Player> DeleteAsync(PlayerDto playerDto)
+    public async Task<Player> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var player = await GetByIdNotNullAsync(id);
+        return await _repository.DeleteAsync(player);
     }
 
-    public Task<Player> GetByIdAsync(Guid id)
+    public async Task<Player?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
     }
 
-    public Task<List<Player>> GetAllAsync()
+    public async Task<Player> GetByIdNotNullAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var player = await GetByIdAsync(id);
+        
+        if (player == null)
+            throw new InvalidOperationException($"Player with id {id} not found");
+        
+        return player;
+    }
+
+    public async Task<List<Player>> GetAllAsync()
+    {
+        var players = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return players.ToList();
     }
 }

@@ -7,7 +7,6 @@ namespace HoopsAPI.Service.Implementation;
 
 public class TeamService : ITeamService
 {
-    
     private readonly IRepository<Team> _repository;
 
     public TeamService(IRepository<Team> repository)
@@ -25,18 +24,36 @@ public class TeamService : ITeamService
         throw new NotImplementedException();
     }
 
-    public Task<Team> DeleteAsync(TeamDto teamDto)
+    public async Task<Team> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var team = await GetByIdNotNull(id);
+        return await _repository.DeleteAsync(team);
     }
 
-    public Task<Team> GetByIdAsync(Guid id)
+    public async Task<Team?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
     }
 
-    public Task<List<Team>> GetAllAsync()
+    public async Task<Team> GetByIdNotNull(Guid id)
     {
-        throw new NotImplementedException();
+        var team = await GetByIdAsync(id);
+
+        if (team == null)
+            throw new InvalidOperationException($"Team with id {id} not found");
+
+        return team;
+    }
+
+    public async Task<List<Team>> GetAllAsync()
+    {
+        var teams = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return teams.ToList();
     }
 }

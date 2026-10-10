@@ -7,9 +7,9 @@ namespace HoopsAPI.Service.Implementation;
 
 public class LeagueService : ILeagueService
 {
-    private readonly IRepository<Coach> _repository;
+    private readonly IRepository<League> _repository;
 
-    public LeagueService(IRepository<Coach> repository)
+    public LeagueService(IRepository<League> repository)
     {
         _repository = repository;
     }
@@ -19,23 +19,48 @@ public class LeagueService : ILeagueService
         throw new NotImplementedException();
     }
 
-    public Task<League> UpdateAsync(CoachDto leagueDto)
+    public Task<League> UpdateAsync(LeagueDto leagueDto)
     {
         throw new NotImplementedException();
     }
 
-    public Task<League> DeleteAsync(CoachDto leagueDto)
+    public async Task<League> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var league = await GetByIdNotNullAsync(id);
+        return await _repository.DeleteAsync(league);
     }
 
-    public Task<League> GetByIdAsync(Guid id)
+    public async Task<League?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var league = await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
+
+        return league;
     }
 
-    public Task<List<League>> GetAllAsync()
+    public async Task<League> GetByIdNotNullAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var league = await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
+
+        if (league == null)
+        {
+            throw new InvalidOperationException($"League with id {id} not found");
+        }
+
+        return league;
+    }
+
+    public async Task<List<League>> GetAllAsync()
+    {
+        var leagues = await _repository.GetAllAsync(
+            selector: x => x
+        );
+        
+        return leagues.ToList();
     }
 }

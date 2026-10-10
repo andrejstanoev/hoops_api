@@ -6,8 +6,8 @@ namespace HoopsAPI.Service.Interface;
 public interface ILeagueService
 {
     public Task<League> InsertAsync(LeagueDto leagueDto);
-    public Task<League> UpdateAsync(CoachDto leagueDto);
-    public Task<League> DeleteAsync(CoachDto leagueDto);
-    public Task<League> GetByIdAsync(Guid id);
+    public Task<League> UpdateAsync(LeagueDto leagueDto);
+    public Task<League> DeleteAsync(Guid id);
+    public Task<League?> GetByIdAsync(Guid id);
     public Task<List<League>> GetAllAsync();
 }

@@ -7,7 +7,7 @@ public interface ITeamService
 {
     public Task<Team> InsertAsync(TeamDto teamDto);
     public Task<Team> UpdateAsync(TeamDto teamDto);
-    public Task<Team> DeleteAsync(TeamDto teamDto);
-    public Task<Team> GetByIdAsync(Guid id);
+    public Task<Team> DeleteAsync(Guid id);
+    public Task<Team?> GetByIdAsync(Guid id);
     public Task<List<Team>> GetAllAsync();
 }

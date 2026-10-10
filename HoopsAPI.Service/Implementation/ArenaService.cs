@@ -7,7 +7,6 @@ namespace HoopsAPI.Service.Implementation;
 
 public class ArenaService : IArenaService
 {
-
     private readonly IRepository<Arena> _repository;
 
     public ArenaService(IRepository<Arena> repository)
@@ -25,18 +24,46 @@ public class ArenaService : IArenaService
         throw new NotImplementedException();
     }
 
-    public async Task<Arena> DeleteAsync(ArenaDto arenaDto)
+    public async Task<Arena> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var arena = await GetByIdNotNullAsync(id);
+        var deleted = await _repository.DeleteAsync(arena);
+        
+        return deleted;
     }
 
-    public async Task<Arena> GetByIdAsync(Guid id)
+
+    public async Task<Arena?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var arena = await _repository.Get(
+            selector: a => a,
+            predicate: a => a.Id == id
+        );
+
+        return arena;
+    }
+
+    public async Task<Arena> GetByIdNotNullAsync(Guid id)
+    {
+        var arena = await _repository.Get(
+            selector: a => a,
+            predicate: a => a.Id == id
+        );
+
+        if (arena == null)
+        {
+            throw new InvalidOperationException($"Arena with id {id} not found");
+        }
+
+        return arena;
     }
 
     public async Task<List<Arena>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var arenas = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return arenas.ToList();
     }
 }

@@ -24,18 +24,36 @@ public class MatchService : IMatchService
         throw new NotImplementedException();
     }
 
-    public Task<Match> DeleteAsync(MatchDto matchDto)
+    public async Task<Match> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var match = await GetByIdNotNullAsync(id);
+        return await _repository.DeleteAsync(match);
     }
 
-    public Task<Match> GetByIdAsync(Guid id)
+    public async Task<Match?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
     }
 
-    public Task<List<Match>> GetAllAsync()
+    public async Task<Match> GetByIdNotNullAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var match = await GetByIdAsync(id);
+
+        if (match == null)
+            throw new InvalidOperationException($"Match with id {id} not found");
+        
+        return match;
+    }
+
+    public async Task<List<Match>> GetAllAsync()
+    {
+        var matches = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return matches.ToList();
     }
 }

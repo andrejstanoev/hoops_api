@@ -7,7 +7,6 @@ namespace HoopsAPI.Service.Implementation;
 
 public class RefereeService : IRefereeService
 {
-    
     private readonly IRepository<Referee> _repository;
 
     public RefereeService(IRepository<Referee> repository)
@@ -20,23 +19,41 @@ public class RefereeService : IRefereeService
         throw new NotImplementedException();
     }
 
-    public Task<Referee> UpdateAsync(RefereeDto refereeDto)
+    public async Task<Referee> UpdateAsync(RefereeDto refereeDto)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Referee> DeleteAsync(RefereeDto refereeDto)
+    public async Task<Referee> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var referee = await GetByIdNotNullAsync(id);
+        return await _repository.DeleteAsync(referee);
     }
 
-    public Task<Referee> GetByIdAsync(Guid id)
+    public async Task<Referee?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _repository.Get(
+            selector: x => x,
+            predicate: x => x.Id == id
+        );
     }
 
-    public Task<List<Referee>> GetAllAsync()
+    public async Task<Referee> GetByIdNotNullAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var referee = await GetByIdAsync(id);
+        
+        if (referee == null)
+            throw new InvalidOperationException($"Referee with id {id} not found");
+        
+        return referee;
+    }
+    
+    public async Task<List<Referee>> GetAllAsync()
+    {
+        var referees = await _repository.GetAllAsync(
+            selector: x => x
+        );
+
+        return referees.ToList();
     }
 }
